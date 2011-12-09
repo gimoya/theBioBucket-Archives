@@ -8,7 +8,7 @@
 # Output File: wcloud.pdf
 # Licence: CC BY-NC-SA
 
-# Load libraries and data
+# Load packages and data
 library(tm)
 library(stringr)
 library(vegan)
