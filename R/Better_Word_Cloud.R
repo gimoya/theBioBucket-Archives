@@ -19,6 +19,8 @@ ISAID <- c("You are so beautiful. You are better than the rest. You are tall and
 # YOU SAID:
 YOUSAID <- c("I am the very best. In fact I am better than the rest. I am tall and I am strong and no one can do me harm. I will stand and will not fall until I hear the last call.")
 
+#########################################################################################
+
 # preparing data ISAID:
 # keep alphanumeric signs and fullstop, remove anything else (all other punctuation)
 ISAID <- gsub("[^[:alpha:][:space:].]", "", ISAID)
@@ -78,6 +80,8 @@ m.speakers[paste("YOU", rownames(m1.YOUSAID)),
 
 # see what words are shared which are used uniquely by one of the two:
 aggregate(m.speakers, by = list(speaker), FUN = sum)
+
+#########################################################################################
 
 # NMDS-Ordination:
 sol.speakers <- metaMDS(m.speakers, dist = "euclidean", k = 2,
