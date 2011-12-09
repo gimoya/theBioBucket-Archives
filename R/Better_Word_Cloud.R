@@ -1,9 +1,8 @@
-# File-Name: Better_Wordcloud.R
+# File-Name: Better_Wordc_Cloud.R
 # Date: 2011-12-07
 # Author: Kay Cichini
 # Email: kay.cichini@gmail.com
 # Purpose: create a word-cloud with spatial meaning
-# Data Used: ISAID.txt, YOUSAID.txt
 # Packages Used: tm, vegan, stringr,
 # Output File: wcloud.pdf
 # Licence: CC BY-NC-SA
