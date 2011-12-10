@@ -12,8 +12,8 @@ source_https <- function(u) {
  require(RCurl)
 
  # read script lines from website using a security certificate
- CAINFO = system.file("CurlSSL", "cacert.pem", package = "RCurl")
- script <- getURL(u, followlocation = TRUE, cainfo = CAINFO)
+ script <- getURL(u, followlocation = TRUE,
+                  cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
 
  # parse lines and evealuate in the global environement
  eval(parse(text = script), envir= .GlobalEnv)
