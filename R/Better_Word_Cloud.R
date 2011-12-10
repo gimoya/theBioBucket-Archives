@@ -96,7 +96,6 @@ par(mar = c(0, 0, 0, 0), oma = rep(0, 4))
 ordiplot(sol.speakers , type = "n")
 ordispider(sol.speakers, group = speaker, col = "grey50")
 cex.lab <- (colSums(m.speakers)/sum(colSums(m.speakers))*length(colSums(m.speakers)))^0.75
-col.lab <- c("grey0", "grey5", "grey15", "grey20", "grey25")
 pch.pts <- substring(speaker, 1, 1)
 points(sol.speakers, pch = pch.pts, cex = 0.85, col = 2, font = 2)
 # adding some transparency will likely make overplotted words more readable:
