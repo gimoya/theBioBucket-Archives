@@ -1,0 +1,22 @@
+# Filename: source_https.R
+# Purpose: function to source raw code from github project
+# Author: Tony Bryal
+# CAINFO Edits: Kay Cichini
+# Date: 2011-12-10
+# http://tonybreyal.wordpress.com/2011/11/24/source_https-sourcing-an-r-script-from-github/
+# url to edited version: https://github.com/gimoya/theBioBucket-Archives/edit/master/R/source_https.R
+
+
+source_https <- function(u) {
+ # load package
+ require(RCurl)
+
+ # read script lines from website using a security certificate
+ script <- getURL(u, followlocation = TRUE,
+                  cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
+
+ # parse lines and evaluate in the global environement
+ eval(parse(text = script), envir= .GlobalEnv)
+}
+
+source_https("https://raw.github.com/tonybreyal/Blog-Reference-Functions/master/R/bingSearchXScraper/bingSearchXScraper.R")
