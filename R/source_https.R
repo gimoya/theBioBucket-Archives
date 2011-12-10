@@ -15,7 +15,7 @@ source_https <- function(u) {
  script <- getURL(u, followlocation = TRUE,
                   cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
 
- # parse lines and evealuate in the global environement
+ # parse lines and evaluate in the global environement
  eval(parse(text = script), envir= .GlobalEnv)
 }
 
