@@ -3,7 +3,7 @@
 # Author: Kay Cichini
 # Email: kay.cichini@gmail.com
 # Purpose: create a word-cloud with spatial meaning
-# Packages Used: tm, vegan, stringr,
+# Packages Used: tm, vegan, stringr, maptools
 # Output File: wcloud.pdf
 # Licence: CC BY-NC-SA
 
@@ -11,6 +11,7 @@
 library(tm)
 library(stringr)
 library(vegan)
+library(maptools)
 
 # I SAID:
 ISAID <- c("You are so beautiful. You are better than the rest. You are tall and you are so very strong and no one can do you harm. You will surely stand and will not fall until you hear the last call.")
@@ -91,17 +92,25 @@ sol.speakers$species <- jitter(sol.speakers$species, amount = 0.65)
 
 # Ordination plot:
 setwd(tempdir())
+
 pdf("wcloud.pdf", height = 5, width = 5)
 par(mar = c(0, 0, 0, 0), oma = rep(0, 4))
-ordiplot(sol.speakers , type = "n")
-ordispider(sol.speakers, group = speaker, col = "grey50")
-# this is for representation of word frequencies:
-cex.lab <- (colSums(m.speakers)/sum(colSums(m.speakers))*length(colSums(m.speakers)))^0.75
-pch.pts <- substring(speaker, 1, 1)
-points(sol.speakers, pch = pch.pts, cex = 0.85, col = 2, font = 2)
-# adding some transparency will likely make overplotted words more readable:
-text(sol.speakers, dis = "species", cex = cex.lab,
-    col = rgb(0.2, 0.5, 0.4, alpha = 0.6))
+
+  ordiplot(sol.speakers , type = "n")
+  ordispider(sol.speakers, group = speaker, col = "grey50")
+
+  # this is for representation of word frequencies:
+  cex.lab <- (colSums(m.speakers)/sum(colSums(m.speakers))*length(colSums(m.speakers)))^0.85
+  pch.pts <- substring(speaker, 1, 1)
+  points(sol.speakers, pch = pch.pts, cex = 0.85, col = 2, font = 2)
+
+  # using pointLabel() from maptools package will avoid overplotting of words:
+  x = as.vector(sol.speakers$species[,1])
+  y = as.vector(sol.speakers$species[,2])
+  w = row.names(sol.speakers$species)
+  col.lab = rgb(0.2, 0.5, 0.4, alpha = 0.6)
+  pointLabel(x, y, w, cex = cex.lab, col = col.lab)
+
 graphics.off()
 
 # open pdf:
