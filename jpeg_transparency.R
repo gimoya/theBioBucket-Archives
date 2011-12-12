@@ -23,8 +23,8 @@ jpeg_transp <- function(path_to_jpeg, alpha = 0.5,
                    dim = c(dim(myjpeg)[1], dim(myjpeg)[2], 4))
 
    png(path_to_outfile,
-       width = dim(myjpeg)[2]*5,
-       height = dim(myjpeg)[1]*5)
+       width = dim(myjpeg)[2],
+       height = dim(myjpeg)[1])
 
 # print newimg to plot region:
    par(mar = rep(0, 4), oma = rep(0, 4), new = F)
