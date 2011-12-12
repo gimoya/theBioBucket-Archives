@@ -28,7 +28,7 @@ jpeg_transp <- function(path_to_jpeg, alpha = 0.5,
 
 # print newimg to plot region:
    par(mar = rep(0, 4), oma = rep(0, 4), new = F)
-   plot(0, xlim = c(0, 100), ylim = c(0, 100),
+   plot(NA, xlim = c(0, 100), ylim = c(0, 100),
         xlab = "", ylab = "", axes = F,
         yaxs ="i", xaxs = "i")
 
