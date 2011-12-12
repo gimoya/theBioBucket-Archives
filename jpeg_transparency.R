@@ -34,10 +34,9 @@ jpeg_transp <- function(path_to_jpeg, alpha = 0.5,
 
    rasterImage(newimg, 0, 0, 100, 100)
    dev.off()
-
-   shell.exec(path_to_outfile)
 }
 
 # example:
 path_to_jpeg <- system.file("img", "Rlogo.jpg", package="jpeg")
 jpeg_transp(path_to_jpeg)
+shell.exec(path.expand("~/mynewimg.png"))
