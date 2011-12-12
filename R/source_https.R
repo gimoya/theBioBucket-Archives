@@ -1,10 +1,8 @@
 # Filename: source_https.R
 # Purpose: function to source raw code from github project
 # Author: Tony Bryal
-# CAINFO Edits: Kay Cichini
 # Date: 2011-12-10
 # http://tonybreyal.wordpress.com/2011/11/24/source_https-sourcing-an-r-script-from-github/
-# url to edited version: https://github.com/gimoya/theBioBucket-Archives/edit/master/R/source_https.R
 
 
 source_https <- function(url, ...) {
