@@ -1,7 +1,7 @@
-# Purpose: get geographic coordinates for a given IP-address
+# Purpose: Get geographic coordinates for a given IP-address
 # Author: Kay Cichini
 # Date: 2011-12-18
-# Output: A String holding longitude and latitude with format "X;Y"
+# Output: A string holding longitude and latitude with format "X;Y"
 
 IPtoXY <- function(x) { 
    URL_IP <- paste("http://www.datasciencetoolkit.org//ip2coordinates/",
