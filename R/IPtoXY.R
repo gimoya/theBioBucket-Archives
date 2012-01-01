@@ -15,4 +15,4 @@ IPtoXY <- function(x) {
 }
 
 # Example:
-IPtoXY("74.88.200.52")
+# IPtoXY("74.88.200.52")
