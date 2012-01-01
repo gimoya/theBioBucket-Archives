@@ -24,7 +24,7 @@ source_https <- function(url, ...) {
 
 
 # Example
-source_https("https://raw.github.com/tonybreyal/Blog-Reference-Functions/master/R/bingSearchXScraper/bingSearchXScraper.R",
-             "https://raw.github.com/gimoya/theBioBucket-Archives/master/R/Better_Word_Cloud.R",
-             "https://raw.github.com/gimoya/theBioBucket-Archives/master/R/GScholarScraper_2.R",
-             "https://raw.github.com/gimoya/theBioBucket-Archives/master/R/RegEx_Examples.R")
+# source_https("https://raw.github.com/tonybreyal/Blog-Reference-Functions/master/R/bingSearchXScraper/bingSearchXScraper.R",
+#              "https://raw.github.com/gimoya/theBioBucket-Archives/master/R/Better_Word_Cloud.R",
+#              "https://raw.github.com/gimoya/theBioBucket-Archives/master/R/GScholarScraper_2.R",
+#              "https://raw.github.com/gimoya/theBioBucket-Archives/master/R/RegEx_Examples.R")
