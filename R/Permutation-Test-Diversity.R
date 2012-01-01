@@ -58,7 +58,6 @@ for(i in 2:K){ ### loop to generate null pop.diff. of differences
 par(mfrow=c(2,1))
 hist(pop.diff.div)
 abline(v=tr.diff.div,lty=3,col=2,lwd=2)
- 
-### diagramms to show null-distributions with obs. differences
+
 hist(pop.diff.rich)
 abline(v=tr.diff.rich,lty=3,col=2,lwd=2)
