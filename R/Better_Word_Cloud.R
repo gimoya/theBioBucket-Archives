@@ -93,7 +93,7 @@ sol.speakers$species <- jitter(sol.speakers$species, amount = 0.65)
 # Ordination plot:
 setwd(tempdir())
 
-pdf("wcloud.pdf", height = 5, width = 5)
+# pdf("wcloud.pdf", height = 5, width = 5)
 par(mar = c(0, 0, 0, 0), oma = rep(0, 4))
 
   ordiplot(sol.speakers , type = "n")
@@ -114,4 +114,4 @@ par(mar = c(0, 0, 0, 0), oma = rep(0, 4))
 graphics.off()
 
 # open pdf:
-browseURL(paste(tempdir(), "/wcloud.pdf", sep = ""))
+# browseURL(paste(tempdir(), "/wcloud.pdf", sep = ""))
