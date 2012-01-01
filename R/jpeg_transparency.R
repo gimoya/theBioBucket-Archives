@@ -36,9 +36,9 @@ jpeg_transp <- function(path_to_jpeg, alpha = 0.5,
    graphics.off()
 }
 
-# example:
-path_to_jpeg <- system.file("img", "Rlogo.jpg", package="jpeg")
-jpeg_transp(path_to_jpeg)
+# Example:
+# path_to_jpeg <- system.file("img", "Rlogo.jpg", package="jpeg")
+# jpeg_transp(path_to_jpeg)
 
 # open png:
-shell.exec(path.expand("~/mynewimg.png"))
+# shell.exec(path.expand("~/mynewimg.png"))
