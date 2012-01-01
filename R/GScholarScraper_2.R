@@ -51,7 +51,7 @@ url <- paste("http://scholar.google.com/scholar?start=0&q=",
       search.str, "&hl=en&lr=lang_en&num=100&as_sdt=1&as_vis=1",
       sep = "")
 
-# ...i’m using urls like: http://scholar.google.com/scholar?start=0&q=allintitle:+amphibians+richness+OR+diversity&hl=en&lr=lang_en&num=100&as_sdt=1&as_vis=1
+# ...iï¿½m using urls like: http://scholar.google.com/scholar?start=0&q=allintitle:+amphibians+richness+OR+diversity&hl=en&lr=lang_en&num=100&as_sdt=1&as_vis=1
 
 webpage <- getURL(url)
 html_str <- paste(webpage, collapse="\n")
@@ -230,5 +230,5 @@ return(d)
 # The below search string will search for titles with the words "amphibians"
 # and "richness" or "diversity":
 
-search.str <- "allintitle:+amphibians+richness+OR+diversity"
-d <- GScholarScraper(search.str, write.table = FALSE)
+# search.str <- "allintitle:+amphibians+richness+OR+diversity"
+# d <- GScholarScraper(search.str, write.table = FALSE)
