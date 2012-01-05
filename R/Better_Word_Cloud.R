@@ -85,10 +85,7 @@ aggregate(m.speakers, by = list(speaker), FUN = sum)
 
 # NMDS-Ordination:
 sol.speakers <- metaMDS(m.speakers, dist = "euclidean", k = 2,
-                      trymax = 10, autotransform = F)
-
-# add some jitter to avoid overplotting:
-sol.speakers$species <- jitter(sol.speakers$species, amount = 0.65)
+                      trymax = 10, autotransform = F, noshare = 0)
 
 # Ordination plot:
 setwd(tempdir())
@@ -104,7 +101,9 @@ par(mar = c(0, 0, 0, 0), oma = rep(0, 4))
   pch.pts <- substring(speaker, 1, 1)
   points(sol.speakers, pch = pch.pts, cex = 0.85, col = 2, font = 2)
 
-  # using pointLabel() from maptools package will avoid overplotting of words:
+  # using pointLabel() from maptools package should avoid overplotting of words.
+  # however, i also add some jitter because i though saw some overplotting
+  sol.speakers$species <- jitter(sol.speakers$species, amount = 0.2)
   x = as.vector(sol.speakers$species[,1])
   y = as.vector(sol.speakers$species[,2])
   w = row.names(sol.speakers$species)
