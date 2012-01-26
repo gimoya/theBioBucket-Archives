@@ -74,7 +74,7 @@ sub(".*\\s(\\w+$)", "\\1", str)
 str <- c("&George W. Bush", "Lyndon B. Johnson?")
 gsub("[^[:alnum:][:space:].]", "", str)
 # keep alphanumeric signs AND full-stop, remove anything else,
-# that is, all other punctuation. the caret the caret delineates what
+# that is, all other punctuation. the caret determines what
 # shouldn't be matched
 
 # output:
