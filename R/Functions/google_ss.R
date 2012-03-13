@@ -1,3 +1,9 @@
+# Script name: google_ss.R
+# Purpose: Read spreadsheet data from Google Docs to R workspace
+# Used packages: RCurl
+# Author: Kay Cichini
+# Date: 12-03-2012
+
 google_ss <- function(gid = NA, key = NA)
     {
     if (is.na(gid)) {stop("\nWorksheetnumber (gid) is missing\n")}
