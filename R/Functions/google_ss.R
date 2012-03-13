@@ -13,7 +13,7 @@ google_ss <- function(gid = NA, key = NA)
 ## Mind that the worksheets are numbered consecutively from 0 to n,
 ## irrespective of the actual worksheet-name.
 ## The key should be put in apostrophes.
-## And, the URL works only for published spreadsheets!
+## The URL works only for published spreadsheets!
  
 (data <- google_ss(gid = 0,
                    key = "0AmwAunwURQNsdDNpZzJqTU90cmpTU0sza2xLTW9fenc"))
