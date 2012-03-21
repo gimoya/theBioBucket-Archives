@@ -90,4 +90,17 @@ dates <- dates[!is.na(dates)]
 # output:
 [1] "30.07.1798" "14.06.1977"
 
+a <- "[question(37), question_pipe(\"Person10\")]"
+b <- unlist(str_extract_all(a, pattern = "\\(.*?\\)"))
+gsub("[[:punct:]]", "", b)
+# extract text (alphanumeric signs only = [1-9, Aa-Zz]) between parantheses,
+# paranthese in search string must be escaped with slashes and
+# .*? stands for any sign, repeated arbitrarily often and does 
+# not extract greedy - that is, it does not take text within first and 
+# last match but from first matches of parantheses!
+
+# output:
+[1] "37"       "Person10"
+
+
 
