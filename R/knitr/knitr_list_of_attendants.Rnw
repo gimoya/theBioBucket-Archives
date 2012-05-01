@@ -29,7 +29,7 @@ options(replace.assign=TRUE,width=90)
 
 \maketitle
 
-If the data in the spreadsheet is changed this should be updated in the report! try it out!
+If the data in the spreadsheet is changed this should be updated in the report! try it out at: \url {https://docs.google.com/spreadsheet/ccc?key=0AmwAunwURQNsdDNpZzJqTU90cmpTU0sza2xLTW9fenc#gid=0}
 
 <<table,results=tex>>=
 ## function to read google spreadsheet 
