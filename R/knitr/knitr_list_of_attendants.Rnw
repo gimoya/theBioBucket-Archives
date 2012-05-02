@@ -56,8 +56,9 @@ require(xtable)
 xtable(my.data)
 @
 
-Does the above chunk work? You should be able to compile the \TeX{}
-document and get a PDF file like this one: \url{https://github.com/gimoya/theBioBucket-Archives/blob/master/R/knitr/knitr_list_of_attendants.pdf}.
+You should be able to compile the \TeX{}
+document and get a PDF file like this one.
+See the function for accessing Google Docs via R at \url {https://github.com/gimoya/theBioBucket-Archives/blob/master/R/Functions/google_ss.R}
 The Rnw source of this document is at \url{https://github.com/gimoya/theBioBucket-Archives/blob/master/R/knitr/knitr_list_of_attendants.Rnw}.
 
 \end{document}
