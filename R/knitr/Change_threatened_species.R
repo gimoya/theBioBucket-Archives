@@ -1,5 +1,6 @@
 # world bank indicators for species - 
 # I'll check bird species:
+require(WDI)
 code <- as.character(WDIsearch("bird")[1,1])
 bird_data <- WDI(country="all", indicator=code, start=2010, end=2012)
 
