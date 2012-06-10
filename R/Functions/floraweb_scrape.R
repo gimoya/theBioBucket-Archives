@@ -11,17 +11,17 @@ floraweb_scraper <- function(x) {
     
     # I didn't get around this encoding issue other than with gsub..
     spch_sub <- function(x) {
-        x <- gsub("Ã¼", "ï¿½", x)
-        x <- gsub("Ã¤", "ï¿½", x)
-        x <- gsub("Ã¶", "ï¿½", x)
-        x <- gsub("Ã„", "ï¿½", x)
-        x <- gsub("ï¿½oe", "ï¿½", x)
-        x <- gsub("Ã¼", "ï¿½", x)
-        x <- gsub("Ã–", "ï¿½", x)
-        x <- gsub("ÃŸ", "ï¿½", x)
-        x <- gsub("Ã©", "ï¿½", x)
-        x <- gsub("ï¿½-", "ï¿½", x)
-        x <- gsub("Ã¡", "ï¿½", x)
+        x <- gsub("Ã¼", "ü", x)
+        x <- gsub("Ã¤", "ä", x)
+        x <- gsub("Ã¶", "ö", x)
+        x <- gsub("Ã„", "Ä", x)
+        x <- gsub("Ãoe", "Ü", x)
+        x <- gsub("Ã¼", "Ä", x)
+        x <- gsub("Ã–", "Ö", x)
+        x <- gsub("ÃŸ", "ß", x)
+        x <- gsub("Ã©", "é", x)
+        x <- gsub("Ã-", "í", x)
+        x <- gsub("Ã¡", "á", x)
         x <- gsub("Â ", "", x)  # pattern for backspaces
     }
     
@@ -36,7 +36,7 @@ floraweb_scraper <- function(x) {
     # load packages:
     require(XML)
     require(RCurl)
-    reuire(jpeg)
+    require(jpeg)
     
     # get parsed script:
     input <- x
