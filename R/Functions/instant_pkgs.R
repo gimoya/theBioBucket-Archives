@@ -11,7 +11,7 @@ instant_pkgs <- function(pkgs) {
     }
     
 	if (length(pkgs_miss) == 0) {
-	message("\n ...All packages were already installed!\n")
+	message("\n ...Packages were already installed!\n")
 	}
 	
     # install packages not already loaded:
@@ -30,7 +30,7 @@ instant_pkgs <- function(pkgs) {
     }
 	
 	if (length(need_to_attach) == 0) {
-	message("\n ...All packages were already loaded!\n")
+	message("\n ...Packages were already loaded!\n")
 	}
 }
 
