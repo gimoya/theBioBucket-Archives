@@ -105,14 +105,12 @@ floraweb_scraper <- function(input) {
 		# clean strings:
 		infos_1 <- gsub(":\\s*", ": ", infos)
 		spl <- strsplit(infos_1, ":")
-
-        infos_2 <- 
-		unlist(lapply(spl, function(x) {
-								paste(x[1], ifelse(nchar(x[2]) > 1, trim(x[2]), "keine Angaben"), 
-								      sep = ": ")
-							}
-						)
-                )
+		
+		infos_2 <- 
+		unlist(lapply(spl, function(x) {paste(x[1], ifelse(nchar(x[2]) > 1, trim(x[2]), "keine Angaben"), sep = ": ")
+						}
+					)
+			)
 		
 		# make dir to save data:
 		dir.create(path.expand("~/FLORAWEB/"), showWarnings = F)
