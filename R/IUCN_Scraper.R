@@ -8,6 +8,7 @@ h <- htmlParse(paste("http://api.iucnredlist.org/go/",
 
 distr1 <- xpathSApply(h, '//ul[@class="countries"]', xmlValue)
 distr2 <- unlist(strsplit(distr1, "\n"))
+distr2[distr2 == "Russian Federation"] <- "Russia"
 
 pop <-xpathSApply(h, '//div[@id="population"]/text()[preceding-sibling::br]', xmlValue)
 status <- xpathSApply(h, '//div[@id="red_list_category_code"]', xmlValue)
