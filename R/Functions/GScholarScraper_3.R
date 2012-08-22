@@ -50,25 +50,23 @@ GScholar_Scraper <- function(x, write = F) {
         # titles:
         tit <- xpathSApply(doc, "//h3[@class='gs_rt']", xmlValue)
         
-        # publicated:
+        # publication:
         pub <- xpathSApply(doc, "//div[@class='gs_a']", xmlValue)
         
         # links:
         lin <- xpathSApply(doc, "//h3[@class='gs_rt']/a", xmlAttrs)
         
-        # summaries are truncated, and thus wont be used..  abst <- xpathSApply(doc,
-        # '//div[@class='gs_rs']', xmlValue)
-
-        # to be extended for individual needs..
+        # summaries are truncated, and thus wont be used..  
+        # abst <- xpathSApply(doc, '//div[@class='gs_rs']', xmlValue)
+        # ..to be extended for individual needs
         
         dat <- data.frame(TITLES = tit, PUBLICATION = pub, LINKS = lin)
         return(dat)
     }
+
     result <- do.call("rbind", lapply(urls, scraper_internal))
     if (write == T) {
-      first <- sub(" .*", "", result$TITLES)
-      result$LINKS <- as.character(result$LINKS)
-      result$LINKS[first %in% c("[HTML]", "[PDF]")] <- paste("=Hyperlink(","\"", result$LINKS[first %in% c("[HTML]", "[PDF]")], "\"", ")", sep = "")
+      result$LINKS <- paste("=Hyperlink(","\"", result$LINKS, "\"", ")", sep = "")
       write.table(result, "GScholar_Output.CSV", sep = ";", 
                   row.names = F, quote = F)
       shell.exec("GScholar_Output.CSV") 
@@ -78,7 +76,7 @@ GScholar_Scraper <- function(x, write = F) {
 }
 
 search_str <- "allintitle:ziggy stardust"
-GScholar_Scraper(search_str, write = F)
+GScholar_Scraper(search_str, write = T)
 
 search_str <- "allintitle:live mars"
 GScholar_Scraper(search_str, write = F)
