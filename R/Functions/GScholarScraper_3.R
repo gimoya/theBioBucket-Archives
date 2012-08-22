@@ -79,7 +79,7 @@ GScholar_Scraper <- function(input, write = F) {
 input <- "allintitle:ziggy stardust"
 GScholar_Scraper(input, write = T)
 
-input <- "allintitle:amphibian"
+input <- "allintitle:live on mars"
 GScholar_Scraper(input, write = F)
 
 # ERROR with message: input <- "allintitle:crazyshit"; GScholar_Scraper(input)
