@@ -11,7 +11,8 @@
 # A search string as used in Google Scholar search dialog
 #
 # (2) write:
-# Logical, should a table be writen to user default directory, by default hyperlinks to the publications are created!
+# Logical, should a table be writen to user default directory?
+# if TRUE a CSV-file with hyperlinks to the publications will be created.
 
 GScholar_Scraper <- function(x, write = F) {
 
