@@ -15,7 +15,7 @@
 # if TRUE a CSV-file with hyperlinks to the publications will be created.
 #
 # Caveat: if a submitted search string gives more than 1000 hits there seem
-# to be some problems (I guess I'm being stopped by google for automatically accessing the site..)
+# to be some problems (I guess I'm being stopped by Google for roboting the site..)
 
 GScholar_Scraper <- function(input, write = F) {
 
