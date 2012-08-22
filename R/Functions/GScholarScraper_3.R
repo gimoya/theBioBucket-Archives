@@ -76,8 +76,8 @@ GScholar_Scraper <- function(x, write = F) {
     }
 }
 
-search_str <- "allintitle:amphibian diversity OR richness"
-GScholar_Scraper(search_str, csv = F)
+search_str <- "allintitle:live mars"
+GScholar_Scraper(search_str, write = F)
 
 # ERROR with message: search_str <- "allintitle:cdsjl"; scraper(search_str)
 
