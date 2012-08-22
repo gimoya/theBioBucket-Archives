@@ -79,5 +79,5 @@ GScholar_Scraper <- function(x, write = F) {
 search_str <- "allintitle:live mars"
 GScholar_Scraper(search_str, write = F)
 
-# ERROR with message: search_str <- "allintitle:cdsjl"; scraper(search_str)
+# ERROR with message: search_str <- "allintitle:cdsjl"; GScholar_Scraper(search_str)
 
