@@ -7,19 +7,19 @@
 # Licence: CC BY-SA-NC
 #
 # Arguments:
-# (1) search_str:
+# (1) input:
 # A search string as used in Google Scholar search dialog
 #
 # (2) write:
 # Logical, should a table be writen to user default directory?
 # if TRUE a CSV-file with hyperlinks to the publications will be created.
 
-GScholar_Scraper <- function(x, write = F) {
+GScholar_Scraper <- function(input, write = F) {
 
     require(XML)
 
     # putting together the search-url:
-    url <- paste("http://scholar.google.at/scholar?q=", x, "&hl=en&lr=lang_en&num=1&as_sdt=1&as_vis=1", 
+    url <- paste("http://scholar.google.at/scholar?q=", input, "&hl=en&lr=lang_en&num=1&as_sdt=1&as_vis=1", 
         sep = "")
     
     # get content and parse it:
@@ -27,7 +27,8 @@ GScholar_Scraper <- function(x, write = F) {
     
     # number of hits:
     x <- xpathSApply(doc, "//div[@id='gs_ab_md']", xmlValue)
-    num <- as.integer(strsplit(x, " ")[[1]][2])
+    y <- strsplit(x, " ")[[1]][2] 
+    num <- as.integer(sub("[[:punct:]]", "", y))
     
     # If there are no results, stop and throw an error message:
     if (num == 0 | is.na(num)) {
@@ -40,7 +41,7 @@ GScholar_Scraper <- function(x, write = F) {
     start <- 100 * 1:pages.max - 100
     
     # Collect urls as list:
-    urls <- paste("http://scholar.google.com/scholar?start=", start, "&q=", search_str, 
+    urls <- paste("http://scholar.google.com/scholar?start=", start, "&q=", input, 
         "&hl=en&lr=lang_en&num=100&as_sdt=1&as_vis=1", sep = "")
     
     scraper_internal <- function(x) {
@@ -75,11 +76,11 @@ GScholar_Scraper <- function(x, write = F) {
     }
 }
 
-search_str <- "allintitle:ziggy stardust"
-GScholar_Scraper(search_str, write = T)
+input <- "allintitle:ziggy stardust"
+GScholar_Scraper(input, write = T)
 
-search_str <- "allintitle:live mars"
-GScholar_Scraper(search_str, write = F)
+input <- "allintitle:amphibian"
+GScholar_Scraper(input, write = F)
 
-# ERROR with message: search_str <- "allintitle:crazyshit"; GScholar_Scraper(search_str)
+# ERROR with message: input <- "allintitle:crazyshit"; GScholar_Scraper(input)
 
