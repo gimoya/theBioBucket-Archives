@@ -13,13 +13,16 @@
 # (2) write:
 # Logical, should a table be writen to user default directory?
 # if TRUE a CSV-file with hyperlinks to the publications will be created.
+#
+# Caveat: if a submitted search string gives more than 1000 hits there seem
+# to be some problems (I guess I'm being stopped by google for automatically accessing the site..)
 
 GScholar_Scraper <- function(input, write = F) {
 
     require(XML)
 
     # putting together the search-url:
-    url <- paste("http://scholar.google.at/scholar?q=", input, "&hl=en&lr=lang_en&num=1&as_sdt=1&as_vis=1", 
+    url <- paste("http://scholar.google.com/scholar?q=", input, "&num=1&as_sdt=1&as_vis=1", 
         sep = "")
     
     # get content and parse it:
@@ -42,7 +45,7 @@ GScholar_Scraper <- function(input, write = F) {
     
     # Collect urls as list:
     urls <- paste("http://scholar.google.com/scholar?start=", start, "&q=", input, 
-        "&hl=en&lr=lang_en&num=100&as_sdt=1&as_vis=1", sep = "")
+        "&num=100&as_sdt=1&as_vis=1", sep = "")
     
     scraper_internal <- function(x) {
         
