@@ -76,8 +76,11 @@ GScholar_Scraper <- function(x, write = F) {
     }
 }
 
+search_str <- "allintitle:ziggy stardust"
+GScholar_Scraper(search_str, write = F)
+
 search_str <- "allintitle:live mars"
 GScholar_Scraper(search_str, write = F)
 
-# ERROR with message: search_str <- "allintitle:cdsjl"; GScholar_Scraper(search_str)
+# ERROR with message: search_str <- "allintitle:WHATTHEF"; GScholar_Scraper(search_str)
 
