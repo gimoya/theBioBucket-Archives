@@ -35,7 +35,6 @@
 GScholar_Scraper <- function(input, since = 1900, write = F, citation = 1) {
 
     require(XML)
-    require(stringr)
 
     # putting together the search-URL:
     URL <- paste("http://scholar.google.com/scholar?q=", input, "&num=1&as_sdt=1,5&as_vis=", 
