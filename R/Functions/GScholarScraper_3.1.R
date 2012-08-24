@@ -18,8 +18,8 @@
 # (3) added "since" argument - define year since when publications should be returned..
 # defaults to 1900..
 #
-# (4) added "citation" argument - logical, if "1" citations are included
-# defaults to "0" and no citations will be included..
+# (4) added "citation" argument - logical, if "0" citations are included
+# defaults to "1" and no citations will be included..
 # added field "YEAR" to output 
 #
 # Caveat: if a submitted search string gives more than 1000 hits there seem
