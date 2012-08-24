@@ -18,8 +18,8 @@
 # (3) added "since" argument - define year since when publications should be returned..
 # defaults to 1900..
 #
-# (4) added "citation" argument - logical, if "1" citations are included
-# defaults to "0" and no citations will be included..
+# (4) added "citation" argument - logical, if "0" citations are included
+# defaults to "1" and no citations will be included..
 # added field "YEAR" to output 
 #
 # Caveat: if a submitted search string gives more than 1000 hits there seem
@@ -35,7 +35,6 @@
 GScholar_Scraper <- function(input, since = 1900, write = F, citation = 1) {
 
     require(XML)
-    require(stringr)
 
     # putting together the search-URL:
     URL <- paste("http://scholar.google.com/scholar?q=", input, "&num=1&as_sdt=1,5&as_vis=", 
@@ -100,29 +99,28 @@ GScholar_Scraper <- function(input, since = 1900, write = F, citation = 1) {
 }
 
 # EXAMPLES:
-
+# 1:
 input <- "intitle:metapopulation"
 df <- GScholar_Scraper(input, since = 1980, citation = 1)
 nrow(df)
 hist(df$YEAR, xlab = "Year", 
      main = "Frequency of Publications with\n\"METAPOPULATION\" in Title")
-
+# 2:
 input <- "allintitle:live on mars"
 GScholar_Scraper(input, since = 2006, citation = 0)
-
+# 3:
 input <- "allintitle:ziggy stardust"
 GScholar_Scraper(input, write = T)
-
-# ERROR with message:
+# 4: ERROR with message:
 input <- "allintitle:crazyshit"
 GScholar_Scraper(input)
-
-# CAVEAT, Google blocks automated requests at about the 1000th hit:
+# 5: CAVEAT, Google blocks automated requests at about the 1000th hit:
 input <- "metapopulation"
 df <- GScholar_Scraper(input, since = 1980)
 nrow(df)
 
-# this also leads to this error for example no. 1,
-# because including citations exceeds 1000 hits and dataframe generation is not working..
+# 6: this also leads to this error for example no. 1,
+# because when including citations (.., citation = 0) 1000 hits are exceeded, 
+# Google blocks and dataframe generation is not working..
 input <- "intitle:metapopulation"
 df <- GScholar_Scraper(input, since = 1980, citation = 0)
