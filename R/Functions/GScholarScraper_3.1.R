@@ -1,4 +1,4 @@
-# File-Name: GScholarScraper_3.R
+# File-Name: GScholarScraper_3.1.R
 # Date: 2012-08-22
 # Author: Kay Cichini
 # Email: kay.cichini@gmail.com
