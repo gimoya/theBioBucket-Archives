@@ -120,6 +120,7 @@ df <- GScholar_Scraper(input, since = 1980)
 nrow(df)
 
 # this also leads to this error for example no. 1,
-# because including citations exceeds 1000 hits and dataframe generation is not working..
+# because including citations (..,citation = 0) exceeds 1000 hits and dataframe 
+# generation is not working..
 input <- "intitle:metapopulation"
-df <- GScholar_Scraper(input, since = 1980, citation = 1)
+df <- GScholar_Scraper(input, since = 1980, citation = 0)
