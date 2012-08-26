@@ -37,8 +37,10 @@ GScholar_Scraper <- function(input, since = 1900, write = F, citation = 1) {
     require(XML)
 
     # putting together the search-URL:
-    URL <- paste("http://scholar.google.com/scholar?q=", input, "&num=1&as_sdt=1,5&as_vis=", 
+    URL <- paste("http://scholar.google.com/scholar?q=", input, "&as_sdt=1,5&as_vis=", 
                  citation, "&as_ylo=", since, sep = "")
+    cat("\nThe URL used is: ", "\n----\n", paste("* ", "http://scholar.google.com/scholar?q=", input, "&as_sdt=1,5&as_vis=", 
+                 citation, "&as_ylo=", since, " *", sep = ""))
     
     # get content and parse it:
     doc <- htmlParse(URL)
@@ -47,7 +49,7 @@ GScholar_Scraper <- function(input, since = 1900, write = F, citation = 1) {
     h1 <- xpathSApply(doc, "//div[@id='gs_ab_md']", xmlValue)
     h2 <- strsplit(h1, " ")[[1]][2] 
     num <- as.integer(sub("[[:punct:]]", "", h2))
-    cat("Number of hits: ", num, "\n----\n", "If this number is far from the returned results\nsomething might have gone wrong..\n\n", sep = "")
+    cat("\n\nNumber of hits: ", num, "\n----\n", "If this number is far from the returned results\nsomething might have gone wrong..\n\n", sep = "")
     
     # If there are no results, stop and throw an error message:
     if (num == 0 | is.na(num)) {
