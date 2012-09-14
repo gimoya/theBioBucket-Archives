@@ -1,7 +1,7 @@
 ## Online Questionnaire with Google Docs and Report with knitr markdown
 This is how you can do a report for a questionnaire using **Google Docs**, **knitr** and **markdown**.
 
-First, the input file was named as `Questionnaire.Rmd`
+The input file was named as `Questionnaire.Rmd`
 ([source](https://github.com/gimoya/theBioBucket-Archives/blob/master/R/knitr/Questionnaire.Rmd)),
 and **knitr** will automatically determine the output filename to be
 `questionnaire.md` (`*.Rmd --> *.md`) when running:
@@ -14,7 +14,7 @@ knit("C:\\Users\\Kay\\theBioBucket-Archives\\R\\knitr\\Questionnaire.Rmd")
 ```
 
 
-## Here's the script to retrieve the data from Google Docs and the R code to do a barplot with the responses to the questionnaire:
+## Here's the code to retrieve the data from Google Docs and the R code to do a barplot with the responses to the questionnaire:
 
 
 ```r
@@ -79,7 +79,7 @@ data[, 1:2]
 ```
 
 
-## Now I produce a plot with the responses to the questionnaire which is uploaded to imgur.com:
+## Then produce a plot with the responses to the questionnaire which is uploaded to imgur.com:
 
 
 ```r
@@ -90,5 +90,5 @@ barplot(table(data[, 2]), main = paste(strwrap(q, width = 40), collapse = "\n"),
     sub = paste("N = ", nrow(data)))
 ```
 
-![plot of chunk barplot](http://i.imgur.com/fQc02.png) 
+![plot of chunk barplot](http://i.imgur.com/u511e.png) 
 
