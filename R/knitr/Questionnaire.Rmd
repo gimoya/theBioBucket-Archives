@@ -2,13 +2,13 @@
 This is how you can do a report for a questionnaire using **Google Docs**, **knitr** and **markdown**.
 
 First, the input file was named as `questionnaire.Rmd`
-([source](https://github.com/gimoya/theBioBucket-Archives/blob/master/R/knitr/questionnaire.Rmd)),
+([source](https://github.com/gimoya/theBioBucket-Archives/blob/master/R/knitr/Questionnaire.Rmd)),
 and **knitr** will automatically determine the output filename to be
 `questionnaire.md` (`*.Rmd --> *.md`) when running:
 
 ```{r knit, eval = FALSE}
 require(knitr)
-knit("C:\\Users\\Kay\\theBioBucket-Archives\\R\\knitr\\Questionnaire-with-R.Rmd")
+knit("C:\\Users\\Kay\\theBioBucket-Archives\\R\\knitr\\Questionnaire.Rmd")
 ```
 
 ## Here's the script to retrieve the data from Google Docs and the R code to do a barplot with the responses to the questionnaire:
