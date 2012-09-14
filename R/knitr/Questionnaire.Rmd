@@ -1,13 +1,14 @@
 ## Online Questionnaire with Google Docs and Report with knitr markdown
 This is how you can do a report for a questionnaire using **Google Docs**, **knitr** and **markdown**.
 
-First, the input file was named as `questionnaire.Rmd`
+First, the input file was named as `Questionnaire.Rmd`
 ([source](https://github.com/gimoya/theBioBucket-Archives/blob/master/R/knitr/Questionnaire.Rmd)),
 and **knitr** will automatically determine the output filename to be
 `questionnaire.md` (`*.Rmd --> *.md`) when running:
 
 ```{r knit, eval = FALSE}
 require(knitr)
+setwd("C:\\Users\\Kay\\theBioBucket-Archives\\R\\knitr")
 knit("C:\\Users\\Kay\\theBioBucket-Archives\\R\\knitr\\Questionnaire.Rmd")
 ```
 

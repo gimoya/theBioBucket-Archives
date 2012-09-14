@@ -1,0 +1,13 @@
+codetools
+knitr
+xtable
+lattice
+RCurl
+bitops
+stats
+graphics
+grDevices
+utils
+datasets
+methods
+base
