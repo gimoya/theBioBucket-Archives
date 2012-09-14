@@ -1,0 +1,52 @@
+## Online Questionnaire with Google Docs and Report with knitr markdown
+This is how you can do a report for a questionnaire using **Google Docs**, **knitr** and **markdown**.
+
+First, the input file was named as `questionnaire.Rmd`
+([source](https://github.com/gimoya/theBioBucket-Archives/blob/master/R/knitr/questionnaire.Rmd)),
+and **knitr** will automatically determine the output filename to be
+`questionnaire.md` (`*.Rmd --> *.md`) when running:
+
+```{r knit, eval = FALSE}
+require(knitr)
+knit("C:\\Users\\Kay\\theBioBucket-Archives\\R\\knitr\\Questionnaire-with-R.Rmd")
+```
+
+## Here's the script to retrieve the data from Google Docs and the R code to do a barplot with the responses to the questionnaire:
+
+```{r setup}
+opts_knit$set(upload.fun = imgur_upload) # upload all images to imgur.com
+opts_chunk$set(fig.width=5, fig.height=5, cache=TRUE)
+```
+
+## I'll use a function ([source](https://github.com/gimoya/theBioBucket-Archives/blob/master/R/Functions/google_ss.R)) to read data from Google Docs:
+
+```{r google_s}
+google_ss <- function(gid = NA, key = NA)
+    {
+    if (is.na(gid)) {stop("\nWorksheetnumber (gid) is missing\n")}
+    if (is.na(key)) {stop("\nDocumentkey (key) is missing\n")}
+    require(RCurl)
+    url <- getURL(paste("https://docs.google.com/spreadsheet/pub?key=", key,
+                        "&single=true&gid=", gid, "&output=csv", sep = ""),
+                  cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
+    read.csv(textConnection(url), header = T, sep = ",")
+    }
+	
+## this is the key for the spreadsheet with the questoinaire responses
+## key = 0AmwAunwURQNsdFplUTBZUTRLREtLUDhabGxBMHBRWmc taken from the documents url
+## and used in the below function
+
+data <- google_ss(gid = 0, key = "0AmwAunwURQNsdFplUTBZUTRLREtLUDhabGxBMHBRWmc")
+data[,1:2]
+```
+
+## Now I produce a plot with the responses to the questionnaire which is uploaded to imgur.com:
+
+```{r barplot, message=FALSE}
+## get the qestionnaires' question & make plot
+q <- paste(gsub("\\.", " ", colnames(data)[2]), "??", sep = "")
+require(lattice)
+barplot(table(data[,2]), 
+        main = paste(strwrap(q, width = 40), collapse = "\n"),
+        sub = paste("N = ", nrow(data)))
+```
