@@ -1,4 +1,4 @@
-## Online Questionnaire with Google Docs and Report with knitr markdown
+# Online Questionnaire with Google Docs and Report with knitr markdown
 This is how you can do a report for a questionnaire using **Google Docs**, **knitr** and **markdown**.
 
 The input file was named as `Questionnaire.Rmd`
@@ -14,16 +14,16 @@ knit("C:\\Users\\Kay\\theBioBucket-Archives\\R\\knitr\\Questionnaire.Rmd")
 ```
 
 
-## Here's the code to retrieve the data from Google Docs and the R code to do a barplot with the responses to the questionnaire:
+The .md-file that's generated is what you see here..
 
+## The code to retrieve data from Google Docs and the R code to do a barplot with the responses to the questionnaire
+I'll use a function ([source](https://github.com/gimoya/theBioBucket-Archives/blob/master/R/Functions/google_ss.R)) to read data from Google Docs
 
 ```r
 opts_knit$set(upload.fun = imgur_upload)  # upload all images to imgur.com
 opts_chunk$set(fig.width = 5, fig.height = 5, cache = TRUE)
 ```
 
-
-## I'll use a function ([source](https://github.com/gimoya/theBioBucket-Archives/blob/master/R/Functions/google_ss.R)) to read data from Google Docs:
 
 
 ```r
@@ -79,7 +79,7 @@ data[, 1:2]
 ```
 
 
-## Then produce a plot with the responses to the questionnaire which is uploaded to imgur.com:
+Then produce a plot with the responses to the questionnaire which is uploaded to imgur.com:
 
 
 ```r
@@ -90,5 +90,5 @@ barplot(table(data[, 2]), main = paste(strwrap(q, width = 40), collapse = "\n"),
     sub = paste("N = ", nrow(data)))
 ```
 
-![plot of chunk barplot](http://i.imgur.com/u511e.png) 
+![plot of chunk barplot](http://i.imgur.com/MRUWh.png) 
 
