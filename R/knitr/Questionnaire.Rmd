@@ -1,4 +1,4 @@
-## Online Questionnaire with Google Docs and Report with knitr markdown
+## Online questionnaire with Google Docs and report with knitr markdown
 ```{r setup, echo=FALSE}
 opts_knit$set(upload.fun = imgur_upload) # upload all images to imgur.com
 opts_chunk$set(fig.width=5, fig.height=5, cache=FALSE)
