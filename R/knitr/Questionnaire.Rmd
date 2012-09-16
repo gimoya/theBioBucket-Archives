@@ -1,27 +1,9 @@
-# Online Questionnaire with Google Docs and Report with knitr markdown
-This is how you can do a report for a questionnaire using **Google Docs**, **knitr** and **markdown**.
-
-The input file was named as `Questionnaire.Rmd`
-([source](https://github.com/gimoya/theBioBucket-Archives/blob/master/R/knitr/Questionnaire.Rmd)),
-and **knitr** will automatically determine the output filename to be
-`questionnaire.md` (`*.Rmd --> *.md`) when running:
-
-```{r knit, eval = FALSE}
-require(knitr)
-setwd("C:\\Users\\Kay\\theBioBucket-Archives\\R\\knitr")
-knit("C:\\Users\\Kay\\theBioBucket-Archives\\R\\knitr\\Questionnaire.Rmd")
-```
-
-The .md-file that's generated is what you see here..
-
-## The code to retrieve data from Google Docs and the R code to do a barplot with the responses to the questionnaire
-I'll use a function ([source](https://github.com/gimoya/theBioBucket-Archives/blob/master/R/Functions/google_ss.R)) to read data from Google Docs
-```{r setup}
+## Online Questionnaire with Google Docs and Report with knitr markdown
+```{r setup, echo=FALSE}
 opts_knit$set(upload.fun = imgur_upload) # upload all images to imgur.com
-opts_chunk$set(fig.width=5, fig.height=5, cache=TRUE)
+opts_chunk$set(fig.width=5, fig.height=5, cache=FALSE)
 ```
-
-```{r google_s}
+```{r google_doc_data, echo=FALSE}
 google_ss <- function(gid = NA, key = NA)
     {
     if (is.na(gid)) {stop("\nWorksheetnumber (gid) is missing\n")}
@@ -36,18 +18,19 @@ google_ss <- function(gid = NA, key = NA)
 ## this is the key for the spreadsheet with the questoinaire responses
 ## key = 0AmwAunwURQNsdFplUTBZUTRLREtLUDhabGxBMHBRWmc taken from the documents url
 ## and used in the below function
-
 data <- google_ss(gid = 0, key = "0AmwAunwURQNsdFplUTBZUTRLREtLUDhabGxBMHBRWmc")
-data[,1:2]
 ```
 
-Then produce a plot with the responses to the questionnaire which is uploaded to imgur.com:
+I use a function ([source](https://github.com/gimoya/theBioBucket-Archives/blob/master/R/Functions/google_ss.R)) to read the data from Google Docs ([source](https://https://docs.google.com/spreadsheet/ccc?key=0AmwAunwURQNsdFplUTBZUTRLREtLUDhabGxBMHBRWmc#gid=0)) .
+With the data I produce a simple barplot with the responses to the questionnaire (this was uploaded to imgur.com). Then I push the .md-file to github for publishing.
+Here is the .Rmd file ([source](https://github.com/gimoya/theBioBucket-Archives/blob/master/R/knitr/Questionnaire.Rmd)) that I used for knitting to produce the .md file ([source](https://github.com/gimoya/theBioBucket-Archives/blob/master/R/knitr/Questionnaire.md)) which is rendered here by Github.
+I use some inline code here - like so: There were `r table(data[,2])[2]` responses with 'NO', `r table(data[,2])[3]` responses with 'YES' and `r table(data[,2])[1]` responses were indefinite. 
 
-```{r barplot, message=FALSE}
-## get the qestionnaires' question & make plot
+```{r barplot, echo=FALSE}
+## get the qestionnaires` question & make plot
 q <- paste(gsub("\\.", " ", colnames(data)[2]), "??", sep = "")
 require(lattice)
-barplot(table(data[,2]), 
+barplot(table(data[,2]), 	
         main = paste(strwrap(q, width = 40), collapse = "\n"),
         sub = paste("N = ", nrow(data)))
 ```
