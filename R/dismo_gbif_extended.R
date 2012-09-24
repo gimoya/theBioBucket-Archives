@@ -1,10 +1,13 @@
+### this tutorial manly follows this webpage 
+### https://sites.google.com/site/rodriguezsanchezf/news/usingrasagis
+
 library(dismo)
  
-### get GBIF data with function (if sp = T, a spatial object is returned):
-sp <- c("campanula", "cochlearifolia") 
-distr <- gbif(sp[1], sp[2])
+### get GBIF data with function gbif
+spec <- c("campanula", "cochlearifolia") 
+distr <- gbif(spec[1], spec[2])
 
-### set spatial coordinates
+### set specatial coordinates
 coordinates(distr) <- c("lon", "lat")
 
 ### Subsetting
@@ -22,10 +25,10 @@ points.at$x <- distr.at@coords[,"lon"]
 points.at$y <- distr.at@coords[,"lat"]
 at.map <- gmap(points.at, type="roadmap")
 
+# Google Maps are in Mercator projection.
+# This function projects the points to that
+# projection to enable mapping
 distr.at.merc <- Mercator(points.at[,c("x","y")])  
-                                      # Google Maps are in Mercator projection.
-                                      # This function projects the points to that
-                                      # projection to enable mapping
 plot(at.map)
 points(distr.at.merc, pch=20, col="red")
  
