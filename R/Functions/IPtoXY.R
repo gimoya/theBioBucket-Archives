@@ -7,10 +7,10 @@ IPtoXY <- function(x) {
    URL_IP <- paste("http://www.datasciencetoolkit.org//ip2coordinates/",
                    x, sep = "")
    api_return <- readLines(URL_IP, warn = F)
-   lon1 <- api_return[grep("longitude", api_return)]
-   lon <- gsub("[^[:digit:].]", "", lon1)
-   lat1 <- api_return[grep("latitude", api_return)]
-   lat <- gsub("[^[:digit:].]", "", lat1)
+   id_lon <- grep("longitude", api_return)
+   lon <- gsub("[^[:digit:].]", "", api_return[id_lon])
+   id_lat<- grep("latitude", api_return)
+   lat <- gsub("[^[:digit:].]", "", api_return[id_lat])
    return(paste(lat, lon, sep = ";"))
 }
 
