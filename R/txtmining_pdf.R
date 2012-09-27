@@ -1,20 +1,25 @@
-# pdftotxt: ftp://ftp.foolabs.com/pub/xpdf/xpdfbin-win-3.03.zip
+# download pdftotxt from 
+# ftp://ftp.foolabs.com/pub/xpdf/xpdfbin-win-3.03.zip
+# and extract to your program files folder
 
+# here is a pdf for mining
 url <- "http://www.noisyroom.net/blog/RomneySpeech072912.pdf"
 dest <- tempfile(fileext = ".pdf")
 download.file(url, dest, mode = "wb")
 
-exe <- "C:\\xpdfbin-win-3.03\\bin32\\pdftotext.exe"
+# set path to pdftotxt.exe and convert pdf to text
+exe <- "C:\\Program Files\\xpdfbin-win-3.03\\bin32\\pdftotext.exe"
 system(paste("\"", exe, "\" \"", dest, "\"", sep = ""), wait = F)
 
+# get txt-file name and open it  
 filetxt <- sub(".pdf", ".txt", dest)
 shell.exec(filetxt); shell.exec(filetxt)    # strangely the first try always throws an error..
 
-#install.packages("tm")
+
+# do something with it, i.e. a simple word cloud 
 library(tm)
- 
-#install.packages("wordcloud")
 library(wordcloud)
+library(Rstem)
 
 txt <- readLines(filetxt) # don't mind warning..
 
@@ -27,16 +32,27 @@ tdm <- TermDocumentMatrix(corpus)
 m <- as.matrix(tdm)
 d <- data.frame(freq = sort(rowSums(m), decreasing = TRUE))
 
-# combine similar words
-l <- nrow(d)
-wordmat <- matrix(rep(NA, l^2), l, l, dimnames = list(row.names(d), row.names(d)))
-for (i in 1:ncol(wordmat)) {
-   rid <- agrep(colnames(wordmat)[i], rownames(wordmat), max = 0)
-   d$matchid[i] <- paste(rid, collapse = "") 
-   }
+# Stem words
+d$stem <- wordStem(row.names(d), language = "english")
+
+# and put words to column, otherwise they would be lost when aggregating
+d$word <- row.names(d)
+
+# remove web address (very long string):
+d <- d[nchar(row.names(d)) < 20, ]
+
+# aggregate freqeuncy by word stem and
+# keep first words..
+agg_freq <- aggregate(freq ~ stem, data = d, sum)
+agg_word <- aggregate(word ~ stem, data = d, function(x) x[1])
+
+d <- cbind(freq = agg_freq[, 2], agg_word)
+
+# sort by frequency
+d <- d[order(d$freq, decreasing = T), ]
 
 # print wordcloud:
 wordcloud(d$word, d$freq)
 
-
+# remove files
 file.remove(dir(tempdir(), full.name=T)) # remove files
