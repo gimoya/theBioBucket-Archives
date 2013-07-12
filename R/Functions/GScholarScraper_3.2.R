@@ -12,7 +12,7 @@
 #
 # (2) write:
 # Logical, should a table be writen to user default directory?
-# if TRUE ("T") a CSV-file with hyperlinks to the publications will be created.
+# if TRUE ("T") a CSV-file will be created.
 #
 # Difference to version 3:
 # (3) added "since" argument - define year since when publications should be returned..
@@ -50,8 +50,10 @@ GScholar_Scraper <- function(input, since = 1900, write = F, citation = 0) {
     
     # number of hits:
     h1 <- xpathSApply(doc, "//div[@id='gs_ab_md']", xmlValue)
-    h2 <- gsub("(\\d?)\\s.*", "\\1", h1)
-    num <- as.integer(sub("[[:punct:]]", "", h2))
+    h2 <- unlist(strsplit(h1, "\\s"))
+    # in splitted string it is the second element containing digits
+    # remove decimal signs and convert tot integer
+    num <- as.integer(gsub("[[:punct:]]", "", h2[grep("\\d", h2)[1]]))
     cat("\n\nNumber of hits: ", num, "\n----\n", "If this number is far from the returned results\nsomething might have gone wrong..\n\n", sep = "")
     
     # If there are no results, stop and throw an error message:
@@ -82,8 +84,7 @@ GScholar_Scraper <- function(input, since = 1900, write = F, citation = 0) {
         # abst <- xpathSApply(doc, '//div[@class='gs_rs']', xmlValue)
         # ..to be extended for individual needs
         options(warn=(-1))
-        dat <- data.frame(TITLES = tit, 
-						  PUBLICATION = pub, 
+        dat <- data.frame(TITLES = tit, PUBLICATION = pub, 
                           YEAR = as.integer(gsub(".*\\s(\\d{4})\\s.*", "\\1", pub)))
         options(warn=0)
         return(dat)
@@ -109,14 +110,14 @@ hist(df$YEAR, xlab = "Year",
 
 # 2:
 input <- "allintitle:live on mars"
-GScholar_Scraper(input, since = 2006, citation = 1)
+GScholar_Scraper(input, since = 2006, citation = 0)
 
 # 3:
 input <- "allintitle:ziggy stardust"
 GScholar_Scraper(input, write = T)
 
 # 4: ERROR with message:
-input <- "allintitle:crazyshit"
+input <- "allintitle:alien plants restoration"
 GScholar_Scraper(input)
 
 # 5: CAVEAT, Google blocks automated requests at about the 1000th hit:
