@@ -51,8 +51,8 @@ GScholar_Scraper <- function(input, since = 1900, write = F, citation = 0) {
     # number of hits:
     h1 <- xpathSApply(doc, "//div[@id='gs_ab_md']", xmlValue)
     h2 <- unlist(strsplit(h1, "\\s"))
-    # in splitted string it is the second element containing digits
-    # remove decimal signs and convert tot integer
+    # in splitted string it is the second element which contains digits,
+    # grab it and remove decimal signs and convert to integer
     num <- as.integer(gsub("[[:punct:]]", "", h2[grep("\\d", h2)[1]]))
     cat("\n\nNumber of hits: ", num, "\n----\n", "If this number is far from the returned results\nsomething might have gone wrong..\n\n", sep = "")
     
