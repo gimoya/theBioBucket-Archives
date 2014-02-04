@@ -35,19 +35,18 @@ KML(slo_final, file="SLOPE_N46_E11.kml", maxpixel = ncell(slo_final),
     overwrite = T, blur = 2, col = colv)
 shell.exec("SLOPE_N46_E11.kml")
 
-## i uploaded the below legend to picasa for latter use in 
+## i uploaded the below legend to imgur for latter use in 
 ## google earth
 png(file = "Legend.png", bg = "white")
 plot.new()
-legend("center", c("25-30", "30-35", "35-40", "40-45", "45-50", "+50"),
+legend("center", c("25-30", "30-35", "35-40", "40-45", "45-50", "50+"),
        pch = 15, cex = 3, col = colv, bty = "n")
 dev.off()
 
 cord <- t(matrix(bbox(slo_final)[,1]))
 placement_legend <- SpatialPointsDataFrame(cord, data.frame(NA))
 icon <- NULL
-description <- paste0('<a href="https://picasaweb.google.com/lh/photo/4q_GS7JFw5mgFaiUhN2UI5RBqZqMYMGBNmKz6sPyj3M?feat=embedwebsite"><img src="https://lh3.googleusercontent.com/-Enra0zPRGIg/UvFZsg8PqmI/AAAAAAAADy0/ThVoI9QwArQ/s144/Legend.jpg"',
-                      '</a>')
+description <- "<a href='http://i.imgur.com/ROcnDNZ.png' <img src='http://i.imgur.com/ROcnDNZ.png'</img></a>"
 kmlPoints(placement_legend, kmlfile="Legend.kml", kmlname="Slope-Legend", name="Click 'Slope-Legend' link for legend..", 
           description="", icon=icon, kmldescription=description)
 
