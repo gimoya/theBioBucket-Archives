@@ -45,10 +45,10 @@ dev.off()
 
 cord <- t(matrix(bbox(slo_final)[,1]))
 placement_legend <- SpatialPointsDataFrame(cord, data.frame(NA))
-icon <- "http://maps.google.com/mapfiles/kml/paddle/L.png"
-description <- paste0("<a href='https://picasaweb.google.com/lh/photo/4q_GS7JFw5mgFaiUhN2UI5RBqZqMYMGBNmKz6sPyj3M?feat=embedwebsite'><img src='https://lh3.googleusercontent.com/-Enra0zPRGIg/UvFZsg8PqmI/AAAAAAAADy0/ThVoI9QwArQ/s144/Legend.jpg' style="width:auto;'",
-                      "</a>")
-kmlPoints(placement_legend, kmlfile="Legend.kml", kmlname="Slope-Legend", name="Click me for legend..", 
-          description=description, icon=icon, kmldescription="Legend for slope-classes")
+icon <- NULL
+description <- paste0('<a href="https://picasaweb.google.com/lh/photo/4q_GS7JFw5mgFaiUhN2UI5RBqZqMYMGBNmKz6sPyj3M?feat=embedwebsite"><img src="https://lh3.googleusercontent.com/-Enra0zPRGIg/UvFZsg8PqmI/AAAAAAAADy0/ThVoI9QwArQ/s144/Legend.jpg"',
+                      '</a>')
+kmlPoints(placement_legend, kmlfile="Legend.kml", kmlname="Slope-Legend", name="Click 'Slope-Legend' link for legend..", 
+          description="", icon=icon, kmldescription=description)
 
 shell.exec("Legend.kml")
