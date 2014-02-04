@@ -39,7 +39,7 @@ shell.exec("SLOPE_N46_E11.kml")
 ## google earth
 png(file = "Legend.png", bg = "white")
 plot.new()
-legend("center", c("+25", "+30", "+35", "+40", "+45", "+50"),
+legend("center", c("25-30", "30-35", "35-40", "40-45", "45-50", "+50"),
        pch = 15, cex = 3, col = colv, bty = "n")
 dev.off()
 
