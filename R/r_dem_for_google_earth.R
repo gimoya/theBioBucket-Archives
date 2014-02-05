@@ -39,7 +39,8 @@ shell.exec("SLOPE_N46_E11.kml")
 ## i uploaded the below legend to imgur for latter use in 
 ## google earth
 png(file = "Legend.png", bg = "white")
-plot.new(title="Slope-Classes in Degrees")
+plot.new()
+title(main=list("Slope-Classes in Degrees:", cex=2.7))
 legend("center", c("25-30", "30-35", "35-40", "40-45", "45-50", "50+"),
        pch = 15, cex = 3, col = colv, bty = "n")
 dev.off()
