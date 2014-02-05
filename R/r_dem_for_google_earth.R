@@ -23,9 +23,10 @@ y <- raster(x)
 
 ## calculate terrain
 slo <- terrain(y, opt = "slope", unit = "degrees", df = F)
+summary(values(slo))
 
 ## set values below 25 to NA, these will be transparent
-## classes ->                                              1           2           3           4           5          6                                                                         
+## classes ->                                         1           2           3           4           5           6                                                                         
 slo_final <- reclassify(slo, c(-Inf, 25, NA, 25, 30, 25, 30, 35, 30, 35, 40, 35, 40, 45, 40, 45, 50, 45, 50, 90, 50))
 hist(slo_final, breaks = 6)
 table(values(slo_final))
@@ -38,7 +39,7 @@ shell.exec("SLOPE_N46_E11.kml")
 ## i uploaded the below legend to imgur for latter use in 
 ## google earth
 png(file = "Legend.png", bg = "white")
-plot.new()
+plot.new(title="Slope-Classes in Degrees")
 legend("center", c("25-30", "30-35", "35-40", "40-45", "45-50", "50+"),
        pch = 15, cex = 3, col = colv, bty = "n")
 dev.off()
