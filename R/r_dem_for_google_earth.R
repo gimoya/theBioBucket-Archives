@@ -2,7 +2,7 @@ library(rgeos)
 library(rgdal)
 library(raster)
 library(maptools)
-library(sp)
+library(XML)
 
 
 ## make directory
@@ -10,31 +10,54 @@ dir.create("D:/GIS_DataBase/DEM/")
 setwd("D:/GIS_DataBase/DEM/")
  
 ## get elevation data
-url <- "http://www.viewfinderpanoramas.org/dem1/N46E011.zip" 
-download.file(url, "N46E011.zip") 
-unzip("N46E011.zip")
-unlink("N46E011.zip")
+filename <- "N47E011"
+kml_file <- paste0("SLOPE_", filename, ".kml")
+zip_file <- paste0(filename, ".zip")
+url <- paste0("http://www.viewfinderpanoramas.org/dem1/", zip_file)
+download.file(url, zip_file)
+unzip(zip_file)
+unlink(zip_file)
 
 ## read elevation data
-x <- readGDAL("D:/Gis_Database/DEM/N46E011.hgt")
+x <- readGDAL(paste0("D:/Gis_Database/DEM/", filename, ".hgt"))
 
 ## coerce into RasterLayer object as desired by terrain function
 y <- raster(x)
 
 ## calculate terrain
 slo <- terrain(y, opt = "slope", unit = "degrees", df = F)
-summary(values(slo))
+
+## check
+# summary(values(slo))
 
 ## set values below 25 to NA, these will be transparent
 ## classes ->                                         1           2           3           4           5           6                                                                         
 slo_final <- reclassify(slo, c(-Inf, 25, NA, 25, 30, 25, 30, 35, 30, 35, 40, 35, 40, 45, 40, 45, 50, 45, 50, 90, 50))
-hist(slo_final, breaks = 6)
-table(values(slo_final))
 
+## inspect data
+# hist(slo_final, breaks = 6)
+# table(values(slo_final))
+
+## set colors for slope angle classes and save as kml
 colv <- rev(heat.colors(6))
-KML(slo_final, file="SLOPE_N46_E11.kml", maxpixel = ncell(slo_final), 
+KML(slo_final, file=kml_file, maxpixel = ncell(slo_final), 
     overwrite = T, blur = 2, col = colv)
-shell.exec("SLOPE_N46_E11.kml")
+
+## add transparency to kml
+## the namespace issue (kml:) is explained in the getNodeSet(XML) R documentation under Details
+doc <- xmlInternalTreeParse(kml_file)
+over_node <- getNodeSet(doc, "/kml:kml/kml:GroundOverlay", c(kml = "http://www.opengis.net/kml/2.2"))
+color_node <- newXMLNode("color", attr="6bffffff")
+over_node[[1]] <- addChildren(over_node[[1]], color_node)
+
+## save kml back & zip to kmz
+## you will need to put in a suitable zipping program (i don't have 7-zip on the PATH, so
+## I need to use an explicit system call..
+saveXML(doc, kml_file)
+cmd <- paste0('"C:\\Program Files\\7-Zip\\7z.exe"', ' a -tzip SLOPE_', filename, '.kmz ', kml_file, ' SLOPE_', filename, '.png')
+cat(cmd)
+system(cmd)
+# shell.exec(paste0("SLOPE_", filename, ".kmz"))
 
 ## i uploaded the below legend to imgur for latter use in 
 ## google earth
@@ -48,8 +71,8 @@ dev.off()
 cord <- t(matrix(bbox(slo_final)[,1]))
 placement_legend <- SpatialPointsDataFrame(cord, data.frame(NA))
 icon <- NULL
-description <- "<a href='http://i.imgur.com/ROcnDNZ.png' <img src='http://i.imgur.com/f4PyQYD.png'</img></a>"
+description <- "<a href='http://gimoya.bplaced.net/Terrain-Overlays/Legend.png' <img src='http://i.imgur.com/f4PyQYD.png'</img></a>"
 kmlPoints(placement_legend, kmlfile="Legend.kml", kmlname="Slope-Legend", name="Click 'Slope-Legend' link for legend..", 
           description="", icon=icon, kmldescription=description)
 
-shell.exec("Legend.kml")
+# shell.exec("Legend.kml")
