@@ -71,7 +71,7 @@ dev.off()
 cord <- t(matrix(bbox(slo_final)[,1]))
 placement_legend <- SpatialPointsDataFrame(cord, data.frame(NA))
 icon <- NULL
-description <- "<a href='http://gimoya.bplaced.net/Terrain-Overlays/Legend.png' <img src='http://gimoya.bplaced.net/Terrain-Overlays/Legend.png'</img></a>"
+description <- "<img src='http://gimoya.bplaced.net/Terrain-Overlays/Legend.png'</img>"
 kmlPoints(placement_legend, kmlfile="Legend.kml", kmlname="Slope-Legend", name="Click 'Slope-Legend' link for legend..", 
           description="", icon=icon, kmldescription=description)
 
