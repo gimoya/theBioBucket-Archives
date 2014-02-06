@@ -59,8 +59,8 @@ cat(cmd)
 system(cmd)
 # shell.exec(paste0("SLOPE_", filename, ".kmz"))
 
-## i uploaded the below legend to imgur for latter use in 
-## google earth
+## i externally uploaded the below legend to my server 
+## for latter use in  adgoogle earth
 png(file = "Legend.png", bg = "white")
 plot.new()
 title(main=list("Slope-Classes in Degrees:", cex=2.7))
@@ -71,7 +71,7 @@ dev.off()
 cord <- t(matrix(bbox(slo_final)[,1]))
 placement_legend <- SpatialPointsDataFrame(cord, data.frame(NA))
 icon <- NULL
-description <- "<a href='http://gimoya.bplaced.net/Terrain-Overlays/Legend.png' <img src='http://i.imgur.com/f4PyQYD.png'</img></a>"
+description <- "<a href='http://gimoya.bplaced.net/Terrain-Overlays/Legend.png' <img src='http://gimoya.bplaced.net/Terrain-Overlays/Legend.png'</img></a>"
 kmlPoints(placement_legend, kmlfile="Legend.kml", kmlname="Slope-Legend", name="Click 'Slope-Legend' link for legend..", 
           description="", icon=icon, kmldescription=description)
 
