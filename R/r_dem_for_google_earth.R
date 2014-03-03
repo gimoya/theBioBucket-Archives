@@ -63,7 +63,7 @@ for (i in 1:length(filenames))
     x[2] <- '<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">'
     writeLines(x, kml_file)
 
-    ## add transparency to kml the namespace issue (kml:) is explained in the getNodeSet(XML) R documentation under Details
+    ## add transparency to kml. the namespace issue (kml:) is explained in the getNodeSet(XML) R documentation under Details
     doc <- xmlInternalTreeParse(kml_file)
     over_node <- getNodeSet(doc, "/kml:kml/kml:GroundOverlay", c(kml = "http://www.opengis.net/kml/2.2"))
     color_node <- newXMLNode("color", attr = "6bffffff")
