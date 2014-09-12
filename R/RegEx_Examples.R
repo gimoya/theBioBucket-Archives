@@ -109,3 +109,8 @@ pat <- "(^|\\s)(\\d{4})($|\\s)"
 as.numeric(regmatches(xx, gregexpr(pat, xx, perl=TRUE))[[1]])
 # output:
 [1] 4567 1234 1238
+
+# trim leading zeroes
+# caret assigns the beginning of a string, zeroe repeated at least once (+) followed by anything, 
+# which is caught with a back-reference ("\\1")
+sub("^[0]+(.)", "\\1", "000650")
