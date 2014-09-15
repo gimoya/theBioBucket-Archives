@@ -111,6 +111,16 @@ as.numeric(regmatches(xx, gregexpr(pat, xx, perl=TRUE))[[1]])
 [1] 4567 1234 1238
 
 # trim leading zeroes
-# caret assigns the beginning of a string, zeroe repeated at least once (+) followed by anything, 
+# caret assigns the beginning of a string, zero repeated at least once (+) followed by anything, 
 # which is caught with a back-reference ("\\1")
 sub("^[0]+(.)", "\\1", "000650")
+# output:
+"650"
+
+# the last task can be achieved more conveniently with str_trim::stringr (thanks, eduard!)
+# however, the input and output here are numbers, whereas in the above example we used strings 
+library(stringr)
+str_trim(000650)
+650
+# output:
+650
