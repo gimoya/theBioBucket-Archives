@@ -121,6 +121,5 @@ sub("^[0]+(.)", "\\1", "000650")
 # however, the input and output here are numbers, whereas in the above example we used strings 
 library(stringr)
 str_trim(000650)
-650
 # output:
 650
