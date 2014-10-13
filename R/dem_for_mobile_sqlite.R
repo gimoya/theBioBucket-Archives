@@ -14,8 +14,8 @@ filenames <- gsub(".hgt", "", dir(pattern=".hgt"))
 ## process all files and save to "/sqlite"
 ## then upload to server
 ## make directory
-# dir.create("D:/GIS_DataBase/DEM/sqlite")
-setwd("D:/GIS_DataBase/DEM/sqlite")
+# dir.create("D:/GIS_DataBase/DEM/slope/sqlite")
+setwd("D:/GIS_DataBase/DEM/slope/sqlite")
 
 for (i in 1:length(filenames)))
 
