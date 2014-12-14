@@ -19,11 +19,11 @@ setwd("D:/GIS_DataBase/DEM/contours")
 
 ## funtion make_kml_contours
 ## arguments
-## step: altitude inbetween contours, starting at 0 m
+## intv: altitude inbetween contours, starting at 0 m
 ## simplify: 1-0, 1 is no generalization, 0 is straight line
 ## ftp: optional ftp uload
 
-make_kml_contours <- function(filename, step = 100, simplify = 0.001, ftp = F) 
+make_kml_contours <- function(filename, intv = 100, simplify = 0.001, ftp = F) 
 
 {
     ## coerce into SpatialGridDataFrame
@@ -32,7 +32,7 @@ make_kml_contours <- function(filename, step = 100, simplify = 0.001, ftp = F)
     ## make image object for contourLines function
     im <- as.image.SpatialGridDataFrame(dem)
     # check: summary(im$z)
-    cl <- contourLines(im, levels = seq(0, max(im$z), step))
+    cl <- contourLines(im, levels = seq(0, max(im$z), intv))
     
     ## back convert to SpatialLinesDataFrame
     SLDF <- ContourLines2SLDF(cl)
@@ -47,16 +47,16 @@ make_kml_contours <- function(filename, step = 100, simplify = 0.001, ftp = F)
     
     ## convert simplified SLDF to KML (btw, that's how to extract IDs unlist(lapply(slot(simplSLDF, 'lines'), function(x) slot(x, 'ID'))) )   
     out <- sapply(slot(simplSLDF, "lines"), function(x) {
-        # get meter level, by picking from sequence by ID: ID = 1 -> 1*step m, ID = 2, 2*step m, etc.
-        m <- seq(0, max(im$z), step)[as.numeric(gsub("C_", "", slot(x, "ID")))]
-        # make thicker lines at 100 and 500 m Isolines
-        kmlLine(x, name = m, description = paste0(m, "m-Isoline"), col = "#FCCD47", lwd = ifelse(m%%100 == 0, ifelse(m%%500, 2, 1.25), 0.75))
+        # get meter level, by picking from sequence by ID: ID = 1 -> 1*intv m, ID = 2, 2*intv m, etc.
+        m <- as.numeric(gsub("C_", "", slot(x, "ID"))) * intv
+        # make thicker lines at 250 and 500 m Isolines
+        kmlLine(x, name = paste0(m , "m"), description = paste0(m, "m-Isoline"), col = "#FCCD47", lwd = ifelse(m%%250 == 0, ifelse(m%%500, 2, 1.25), 0.75))
     })
     
     # write KML
     tf <- tempfile()
     kmlFile <- file(tf, "w")
-    cat(kmlLine(kmlname = "Contour Lines", kmldescription = "<i>Contour lines by Kay Cichini, see <a href=\"htp://gimoya.bplaced.net/terrain-overlays.blogspot.co.at\">Terrain-Overlays</a> for details</i>")$header, 
+    cat(kmlLine(kmlname = "Contour Lines", kmldescription = "<i>50 m Isolines by Kay Cichini, see <a href=\"htp://gimoya.bplaced.net/terrain-overlays.blogspot.co.at\">Terrain-Overlays</a> for details</i>")$header, 
         file = kmlFile, sep = "\n")
     cat(unlist(out["style", ]), file = kmlFile, sep = "\n")
     cat(unlist(out["content", ]), file = kmlFile, sep = "\n")
@@ -68,9 +68,9 @@ make_kml_contours <- function(filename, step = 100, simplify = 0.001, ftp = F)
     if (ftp == T) ftpUpload(kmlName, paste0('ftp://gimoya:password@gimoya.bplaced.net/Terrain-Overlays/downloads/', kmlName))
 }
 
-for (filename in filenames[2:136]) 
+for (filename in filenames[2:3]) 
       {
-  	tryCatch(make_kml_contours(filename, step = 25, simplify = 0.0001, ftp = T), 
+  	tryCatch(make_kml_contours(filename, intv = 50, simplify = 0.0005, ftp = F), 
                error = function(e) message(paste0("\n..something happend with dataset ", filename, ":\n", e)))
       cat("File ", filename, " done!..\n")
 	}

@@ -1,8 +1,10 @@
-library(rgdal)
 ## Extract ways from OpenStreetMaps Export
 ## and save to file
+
+library(rgdal)
 library/maptools)
 library(osmar)
+
 path <- "C:/Users/Kay/Downloads/"
 
 # file export from OpenStreetMaps:
@@ -25,4 +27,4 @@ plot_ways(trks, add = TRUE, col = "green")
 # convert to spatial object (SpatialLinesDataFrame)
 # and save to whatever format you like..
 tr_line <- as_sp(trks, "lines")
-writeOGR(tr_line, dsn="OSM_R_extract.json", layer="osm_tracks", driver="GeoJSON")
+writeOGR(tr_line, dsn="OSM_R_extract.sqlite", layer="osm_tracks", driver="SQLite")
