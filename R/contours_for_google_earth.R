@@ -20,7 +20,7 @@ setwd("D:/GIS_DataBase/DEM/contours")
 ## funtion make_kml_contours
 ## arguments
 ## intv: altitude inbetween contours, starting at 0 m
-## simplify: 1-0, 1 is no generalization, 0 is straight line
+## simplify: 1-0, 0 is no generalization, 1 is straight line
 ## ftp: optional ftp uload
 
 make_kml_contours <- function(filename, intv = 100, simplify = 0.001, ftp = F) 
@@ -50,7 +50,7 @@ make_kml_contours <- function(filename, intv = 100, simplify = 0.001, ftp = F)
         # get meter level, by picking from sequence by ID: ID = 1 -> 1*intv m, ID = 2, 2*intv m, etc.
         m <- as.numeric(gsub("C_", "", slot(x, "ID"))) * intv
         # make thicker lines at 250 and 500 m Isolines
-        kmlLine(x, name = paste0(m , "m"), description = paste0(m, "m-Isoline"), col = "#FCCD47", lwd = ifelse(m%%250 == 0, ifelse(m%%500, 2, 1.25), 0.75))
+        kmlLine(x, name = paste0(m , "m"), description = paste0(m, "m-Isoline"), col = "#FCCD47", lwd = ifelse(m%%250 == 0, ifelse(m%%500 == 0, 2, 1.25), 0.75))
     })
     
     # write KML
@@ -68,9 +68,9 @@ make_kml_contours <- function(filename, intv = 100, simplify = 0.001, ftp = F)
     if (ftp == T) ftpUpload(kmlName, paste0('ftp://gimoya:password@gimoya.bplaced.net/Terrain-Overlays/downloads/', kmlName))
 }
 
-for (filename in filenames[2:3]) 
+for (filename in filenames[2:2]) 
       {
-  	tryCatch(make_kml_contours(filename, intv = 50, simplify = 0.0005, ftp = F), 
+  	tryCatch(make_kml_contours(filename, intv = 50, simplify = 0.001, ftp = F), 
                error = function(e) message(paste0("\n..something happend with dataset ", filename, ":\n", e)))
       cat("File ", filename, " done!..\n")
 	}
