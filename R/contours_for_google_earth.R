@@ -78,7 +78,7 @@ make_kml_contours <- function(filename, intv = 100, simplify = 0.001, ftp = F)
     if (ftp == T) ftpUpload(kmlName, paste0('ftp://gimoya:password@gimoya.bplaced.net/Terrain-Overlays/downloads/', kmlName))
 }
 
-for (filename in filenames[2:length(filenames)]) 
+for (filename in filenames[3:length(filenames)]) 
       {
   	tryCatch(make_kml_contours(filename, intv = 50, simplify = 0.00005, ftp = F), 
                error = function(e) message(paste0("\n..something happend with dataset ", filename, ":\n", e)))
