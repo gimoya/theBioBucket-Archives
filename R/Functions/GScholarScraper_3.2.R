@@ -109,7 +109,7 @@ hist(df$YEAR, xlab = "Year",
      main = "Frequency of Publications with\n\"METAPOPULATION\" in Title")
 
 # 2:
-input <- "allintitle:live on mars"
+input <- "allintitle:life on mars"
 GScholar_Scraper(input, since = 2006, citation = 0)
 
 # 3:
