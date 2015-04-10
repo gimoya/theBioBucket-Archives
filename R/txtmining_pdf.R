@@ -13,7 +13,7 @@ system(paste("\"", exe, "\" \"", dest, "\"", sep = ""), wait = F)
 
 # get txt-file name and open it  
 filetxt <- sub(".pdf", ".txt", dest)
-shell.exec(filetxt); shell.exec(filetxt)    # strangely the first try always throws an error..
+shell.exec(filetxt)
 
 
 # do something with it, i.e. a simple word cloud 
